@@ -9,17 +9,7 @@ const Lead = require("./models/Lead");
 const Admin = require("./models/Admin");
 const isAuthenticated = require("./middleware/auth");
 
-
-// ===============================
-// LOAD ENVIRONMENT VARIABLES
-// ===============================
-
 dotenv.config();
-
-
-// ===============================
-// CREATE APP
-// ===============================
 
 const app = express();
 
@@ -28,9 +18,6 @@ const PORT = process.env.PORT || 3000;
 const MONGO_URL = process.env.MONGO_URI;
 
 console.log("Mongo URI exists:", !!process.env.MONGO_URI);
-// ===============================
-// CONNECT TO DATABASE
-// ===============================
 
 main()
     .then(() => {
@@ -47,19 +34,9 @@ async function main() {
 
 }
 
-
-// ===============================
-// APP CONFIGURATION
-// ===============================
-
 app.set("view engine", "ejs");
 
 app.use(express.urlencoded({ extended: true }));
-
-
-// ===============================
-// SESSION CONFIGURATION
-// ===============================
 
 app.use(
 
@@ -88,9 +65,8 @@ app.use(
 );
 
 
-// ===============================
+
 // HOME PAGE
-// ===============================
 
 app.get("/", (req, res) => {
 
@@ -99,9 +75,8 @@ app.get("/", (req, res) => {
 });
 
 
-// ===============================
 // SUBMIT A NEW LEAD
-// ===============================
+
 
 app.post("/leads", async (req, res) => {
 
@@ -120,9 +95,8 @@ app.post("/leads", async (req, res) => {
         } = req.body;
 
 
-        // ===============================
         // REQUIRED FIELDS VALIDATION
-        // ===============================
+
 
         if (!name || !email || !budget || !message) {
 
@@ -135,10 +109,6 @@ app.post("/leads", async (req, res) => {
         }
 
 
-        // ===============================
-        // NAME VALIDATION
-        // ===============================
-
         if (name.trim().length < 2) {
 
             return res.status(400).send(
@@ -149,10 +119,6 @@ app.post("/leads", async (req, res) => {
 
         }
 
-
-        // ===============================
-        // EMAIL VALIDATION
-        // ===============================
 
         const emailRegex =
 
@@ -169,11 +135,6 @@ app.post("/leads", async (req, res) => {
 
         }
 
-
-        // ===============================
-        // MESSAGE VALIDATION
-        // ===============================
-
         if (message.trim().length < 10) {
 
             return res.status(400).send(
@@ -183,11 +144,6 @@ app.post("/leads", async (req, res) => {
             );
 
         }
-
-
-        // ===============================
-        // CREATE LEAD
-        // ===============================
 
         const newLead = new Lead({
 
@@ -201,17 +157,7 @@ app.post("/leads", async (req, res) => {
 
         });
 
-
-        // ===============================
-        // SAVE LEAD
-        // ===============================
-
         await newLead.save();
-
-
-        // ===============================
-        // SHOW SUCCESS PAGE
-        // ===============================
 
         res.render("success");
 
@@ -233,9 +179,9 @@ app.post("/leads", async (req, res) => {
 });
 
 
-// ===============================
+
 // ADMIN LOGIN PAGE
-// ===============================
+
 
 app.get("/admin/login", (req, res) => {
 
@@ -243,10 +189,6 @@ app.get("/admin/login", (req, res) => {
 
 });
 
-
-// ===============================
-// ADMIN LOGIN
-// ===============================
 
 app.post("/admin/login", async (req, res) => {
 
@@ -301,10 +243,6 @@ app.post("/admin/login", async (req, res) => {
         }
 
 
-        // ===============================
-        // CREATE LOGIN SESSION
-        // ===============================
-
         req.session.adminId = admin._id;
 
 
@@ -328,9 +266,6 @@ app.post("/admin/login", async (req, res) => {
 });
 
 
-// ===============================
-// ADMIN DASHBOARD + SEARCH
-// ===============================
 
 app.get(
 
@@ -414,10 +349,6 @@ app.get(
 );
 
 
-// ===============================
-// UPDATE LEAD STATUS
-// ===============================
-
 app.post(
 
     "/admin/leads/:id/status",
@@ -476,11 +407,6 @@ app.post(
 
 );
 
-
-// ===============================
-// ADMIN LOGOUT
-// ===============================
-
 app.get(
 
     "/admin/logout",
@@ -516,10 +442,6 @@ app.get(
 
 );
 
-
-// ===============================
-// START SERVER
-// ===============================
 
 app.listen(
 
