@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Admin Dashboard</title>
+</head>
+<body>
+
+    <h1>LeadDesk Admin Dashboard</h1>
+
+    <p>Total Leads: <%= leads.length %></p>
+
+    <% if (leads.length === 0) { %>
+
+        <p>No leads found.</p>
+
+    <% } else { %>
+
+        <% leads.forEach(lead => { %>
+
+            <div>
+                <h3><%= lead.name %></h3>
+
+                <p>Email: <%= lead.email %></p>
+
+                <p>Budget: <%= lead.budget %></p>
+
+                <p>Message: <%= lead.message %></p>
+
+                <p>Status: <%= lead.status %></p>
+
+                <hr>
+            </div>
+
+        <% }) %>
+
+    <% } %>
+
+</body>
+</html>

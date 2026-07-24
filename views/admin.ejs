@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>LeadDesk Admin</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f6fa;
+            color: #111827;
+        }
+
+        .navbar {
+            height: 72px;
+            background: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 6%;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+        }
+
+        .logo span {
+            color: #6366f1;
+        }
+
+        .logout {
+            text-decoration: none;
+            color: #ef4444;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .container {
+            max-width: 1250px;
+            margin: 0 auto;
+            padding: 45px 24px;
+        }
+
+        .header-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .header-section h1 {
+            font-size: 30px;
+            margin-bottom: 8px;
+        }
+
+        .header-section p {
+            color: #6b7280;
+        }
+
+        .stats-card {
+            background: white;
+            padding: 20px 28px;
+            border-radius: 14px;
+            border: 1px solid #e5e7eb;
+            text-align: center;
+        }
+
+        .stats-card strong {
+            display: block;
+            font-size: 28px;
+            color: #6366f1;
+        }
+
+        .stats-card span {
+            font-size: 13px;
+            color: #6b7280;
+        }
+
+        .search-card {
+            background: white;
+            padding: 20px;
+            border-radius: 14px;
+            border: 1px solid #e5e7eb;
+            margin-bottom: 24px;
+        }
+
+        .search-form {
+            display: flex;
+            gap: 12px;
+        }
+
+        .search-form input {
+            flex: 1;
+            padding: 13px 15px;
+            border: 1px solid #d1d5db;
+            border-radius: 9px;
+            font-size: 14px;
+            outline: none;
+        }
+
+        .search-form input:focus {
+            border-color: #6366f1;
+        }
+
+        .search-button {
+            padding: 0 24px;
+            border: none;
+            border-radius: 9px;
+            background: #6366f1;
+            color: white;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .table-card {
+            background: white;
+            border-radius: 14px;
+            border: 1px solid #e5e7eb;
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 850px;
+        }
+
+        th {
+            text-align: left;
+            padding: 18px 20px;
+            background: #f9fafb;
+            color: #6b7280;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        td {
+            padding: 20px;
+            border-top: 1px solid #f0f1f4;
+            font-size: 14px;
+            vertical-align: top;
+        }
+
+        .lead-name {
+            font-weight: 600;
+            color: #111827;
+        }
+
+        .email {
+            color: #6b7280;
+        }
+
+        .message {
+            max-width: 260px;
+            color: #6b7280;
+            line-height: 1.5;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 6px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .status-new {
+            background: #eef2ff;
+            color: #4f46e5;
+        }
+
+        .status-contacted {
+            background: #fff7ed;
+            color: #c2410c;
+        }
+
+        .status-closed {
+            background: #ecfdf5;
+            color: #047857;
+        }
+
+        .status-form {
+            display: flex;
+            gap: 8px;
+            margin-top: 10px;
+        }
+
+        .status-form select {
+            padding: 7px;
+            border: 1px solid #d1d5db;
+            border-radius: 7px;
+            font-size: 12px;
+        }
+
+        .update-button {
+            padding: 7px 10px;
+            border: none;
+            border-radius: 7px;
+            background: #111827;
+            color: white;
+            font-size: 12px;
+            cursor: pointer;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: #6b7280;
+        }
+
+        @media (max-width: 700px) {
+
+            .header-section {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 20px;
+            }
+
+            .stats-card {
+                width: 100%;
+                text-align: left;
+            }
+
+            .search-form {
+                flex-direction: column;
+            }
+
+            .search-button {
+                padding: 13px;
+            }
+
+        }
+    </style>
+
+</head>
+
+<body>
+
+
+    <nav class="navbar">
+
+        <div class="logo">
+            Lead<span>Desk</span>
+        </div>
+
+        <a href="/admin/logout" class="logout">
+            Logout
+        </a>
+
+    </nav>
+
+
+    <main class="container">
+
+
+        <section class="header-section">
+
+            <div>
+
+                <h1>
+                    Lead Dashboard
+                </h1>
+
+                <p>
+                    Manage and track your incoming inquiries.
+                </p>
+
+            </div>
+
+
+            <div class="stats-card">
+
+                <strong>
+                    <%= leads.length %>
+                </strong>
+
+                <span>
+                    Total Leads
+                </span>
+
+            </div>
+
+        </section>
+
+
+        <section class="search-card">
+
+            <form action="/admin" method="GET" class="search-form">
+
+                <input type="text" name="search" placeholder="Search by name or email..." value="<%= search %>">
+
+                <button type="submit" class="search-button">
+                    Search
+                </button>
+
+            </form>
+
+        </section>
+
+
+        <section class="table-card">
+
+            <% if (leads.length===0) { %>
+
+                <div class="empty-state">
+
+                    <h3>
+                        No leads found
+                    </h3>
+
+                    <p>
+                        Try searching with a different name or email.
+                    </p>
+
+                </div>
+
+                <% } else { %>
+
+
+                    <table>
+
+                        <thead>
+
+                            <tr>
+
+                                <th>
+                                    Lead
+                                </th>
+
+                                <th>
+                                    Budget
+                                </th>
+
+                                <th>
+                                    Message
+                                </th>
+
+                                <th>
+                                    Status
+                                </th>
+
+                            </tr>
+
+                        </thead>
+
+
+                        <tbody>
+
+                            <% leads.forEach(lead=> { %>
+
+                                <tr>
+
+                                    <td>
+
+                                        <div class="lead-name">
+                                            <%= lead.name %>
+                                        </div>
+
+                                        <div class="email">
+                                            <%= lead.email %>
+                                        </div>
+
+                                    </td>
+
+
+                                    <td>
+                                        <%= lead.budget %>
+                                    </td>
+
+
+                                    <td>
+
+                                        <div class="message">
+                                            <%= lead.message %>
+                                        </div>
+
+                                    </td>
+
+
+                                    <td>
+
+                                        <% let statusClass="status-new" ; if (lead.status==="Contacted" ) {
+                                            statusClass="status-contacted" ; } if (lead.status==="Closed" ) {
+                                            statusClass="status-closed" ; } %>
+
+
+                                            <span class="status-badge <%= statusClass %>">
+
+                                                <%= lead.status %>
+
+                                            </span>
+
+
+                                            <form action="/admin/leads/<%= lead._id %>/status" method="POST"
+                                                class="status-form">
+
+                                                <select name="status">
+
+                                                    <option value="New" <%=lead.status==="New" ? "selected" : "" %>
+                                                        >
+                                                        New
+                                                    </option>
+
+                                                    <option value="Contacted" <%=lead.status==="Contacted" ? "selected"
+                                                        : "" %>
+                                                        >
+                                                        Contacted
+                                                    </option>
+
+                                                    <option value="Closed" <%=lead.status==="Closed" ? "selected" : ""
+                                                        %>
+                                                        >
+                                                        Closed
+                                                    </option>
+
+                                                </select>
+
+
+                                                <button type="submit" class="update-button">
+                                                    Update
+                                                </button>
+
+                                            </form>
+
+                                    </td>
+
+                                </tr>
+
+                                <% }) %>
+
+                        </tbody>
+
+                    </table>
+
+
+                    <% } %>
+
+        </section>
+
+
+    </main>
+
+</body>
+
+</html>

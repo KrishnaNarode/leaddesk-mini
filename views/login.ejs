@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
+
+<title>LeadDesk | Admin Login</title>
+
+<style>
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        min-height: 100vh;
+        font-family: Arial, sans-serif;
+        background: #f7f8fc;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #111827;
+    }
+
+    .login-wrapper {
+        width: 90%;
+        max-width: 1000px;
+        min-height: 580px;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        background: white;
+        border-radius: 24px;
+        overflow: hidden;
+        box-shadow: 0 25px 60px rgba(0, 0, 0, 0.1);
+    }
+
+    .login-info {
+        background: #111827;
+        color: white;
+        padding: 60px 50px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .logo {
+        font-size: 26px;
+        font-weight: 700;
+        margin-bottom: 70px;
+    }
+
+    .logo span {
+        color: #818cf8;
+    }
+
+    .login-info h1 {
+        font-size: 42px;
+        line-height: 1.15;
+        margin-bottom: 22px;
+    }
+
+    .login-info h1 span {
+        color: #818cf8;
+    }
+
+    .login-info p {
+        color: #9ca3af;
+        line-height: 1.7;
+        max-width: 380px;
+    }
+
+    .feature-list {
+        margin-top: 35px;
+        list-style: none;
+    }
+
+    .feature-list li {
+        margin-bottom: 15px;
+        color: #d1d5db;
+        font-size: 14px;
+    }
+
+    .feature-list li::before {
+        content: "✓";
+        color: #818cf8;
+        font-weight: bold;
+        margin-right: 10px;
+    }
+
+    .login-section {
+        padding: 60px 50px;
+        display: flex;
+        align-items: center;
+    }
+
+    .login-box {
+        width: 100%;
+    }
+
+    .login-box h2 {
+        font-size: 30px;
+        margin-bottom: 10px;
+    }
+
+    .login-subtitle {
+        color: #6b7280;
+        font-size: 14px;
+        margin-bottom: 35px;
+    }
+
+    .form-group {
+        margin-bottom: 22px;
+    }
+
+    .form-group label {
+        display: block;
+        font-size: 14px;
+        font-weight: 600;
+        margin-bottom: 8px;
+    }
+
+    .form-group input {
+        width: 100%;
+        padding: 14px;
+        border: 1px solid #d1d5db;
+        border-radius: 10px;
+        font-size: 14px;
+        outline: none;
+        transition: 0.2s;
+    }
+
+    .form-group input:focus {
+        border-color: #6366f1;
+        box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.12);
+    }
+
+    .login-button {
+        width: 100%;
+        padding: 14px;
+        border: none;
+        border-radius: 10px;
+        background: #6366f1;
+        color: white;
+        font-size: 15px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: 0.2s;
+    }
+
+    .login-button:hover {
+        background: #4f46e5;
+        transform: translateY(-1px);
+    }
+
+    .back-home {
+        display: block;
+        text-align: center;
+        margin-top: 25px;
+        color: #6b7280;
+        font-size: 14px;
+        text-decoration: none;
+    }
+
+    .back-home:hover {
+        color: #6366f1;
+    }
+
+    @media (max-width: 750px) {
+
+        .login-wrapper {
+            grid-template-columns: 1fr;
+        }
+
+        .login-info {
+            padding: 40px 30px;
+        }
+
+        .login-info h1 {
+            font-size: 32px;
+        }
+
+        .logo {
+            margin-bottom: 30px;
+        }
+
+        .feature-list {
+            display: none;
+        }
+
+        .login-section {
+            padding: 40px 30px;
+        }
+
+    }
+
+</style>
+
+
+</head>
+
+<body>
+
+<div class="login-wrapper">
+
+
+    <section class="login-info">
+
+        <div class="logo">
+            Lead<span>Desk</span>
+        </div>
+
+        <h1>
+            Manage your
+            <span>leads.</span>
+        </h1>
+
+        <p>
+            Welcome back. Access your dashboard to manage incoming
+            inquiries, track conversations, and keep your leads organized.
+        </p>
+
+        <ul class="feature-list">
+
+            <li>
+                View all incoming leads
+            </li>
+
+            <li>
+                Search and filter inquiries
+            </li>
+
+            <li>
+                Track lead status
+            </li>
+
+        </ul>
+
+    </section>
+
+
+    <section class="login-section">
+
+        <div class="login-box">
+
+            <h2>
+                Welcome back
+            </h2>
+
+            <p class="login-subtitle">
+                Sign in to access your admin dashboard.
+            </p>
+
+
+            <form
+                action="/admin/login"
+                method="POST"
+            >
+
+                <div class="form-group">
+
+                    <label for="username">
+                        Username
+                    </label>
+
+                    <input
+                        type="text"
+                        id="username"
+                        name="username"
+                        placeholder="Enter your username"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="password">
+                        Password
+                    </label>
+
+                    <input
+                        type="password"
+                        id="password"
+                        name="password"
+                        placeholder="Enter your password"
+                        required
+                    >
+
+                </div>
+
+
+                <button
+                    type="submit"
+                    class="login-button"
+                >
+                    Sign In →
+                </button>
+
+            </form>
+
+
+            <a
+                href="/"
+                class="back-home"
+            >
+                ← Back to public site
+            </a>
+
+        </div>
+
+    </section>
+
+
+</div>
+
+
+</body>
+
+</html>
